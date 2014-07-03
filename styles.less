@@ -1,0 +1,65 @@
+@accent: #009B86;
+@primary: #ddd;
+@banner-size: 150px;
+
+* {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+body {
+	font-family: "Source Sans Pro", sans-serif;
+	background-color: @accent;
+}
+
+header {
+	height: @banner-size;
+	background-color: @accent;
+
+	nav {
+		position: absolute;
+		color: white;
+		text-align: center;
+		font-size: 1.5em;
+		top: 0;
+		right: 0;
+		width: ~"calc(100% - @{banner-size})";
+	}
+}
+
+#title-box {
+	height: 100%;
+	font-weight: bold;
+	width: @banner-size;
+	background-color: @primary;
+	position: relative;
+	text-align: left;
+	font-size: 1.2em;
+
+	> span {
+		position: absolute;
+		top: 50%;
+		width: 100%;
+		left: 15px;
+	}
+}
+
+#sidebar {
+	width: @banner-size;
+	color: white;
+}
+
+#content {
+	background-color: @primary;
+	width: ~"calc(100% - @{banner-size})";
+	min-height: ~"calc(100% - @{banner-size})";
+	position: absolute;
+	top: @banner-size;
+	right: 0;
+	padding: 10px;
+}
