@@ -1,5 +1,6 @@
 @accent: #009B86;
-@primary: #ddd;
+@title: white;
+@content: @title;
 @banner-size: 150px;
 
 * {
@@ -20,6 +21,7 @@ body {
 header {
 	height: @banner-size;
 	background-color: @accent;
+	font-family: "Roboto Slab", sans-serif;
 
 	nav {
 		position: absolute;
@@ -36,17 +38,19 @@ header {
 	height: 100%;
 	font-weight: bold;
 	width: @banner-size;
-	background-color: @primary;
+	background-color: @title;
 	position: relative;
-	text-align: left;
-	font-size: 1.2em;
+	text-align: right;
+	font-size: 2em;
+	color: @accent;
 
 	> span {
 		position: absolute;
-		top: 50%;
+		bottom: 30px;
 		width: 100%;
-		left: 15px;
+		right: 15px;
 	}
+
 }
 
 #sidebar {
@@ -55,7 +59,8 @@ header {
 }
 
 #content {
-	background-color: @primary;
+	background-color: @content;
+	// background: linear-gradient(to bottom, lighten(@accent, 65%) 0%, white 100%);
 	width: ~"calc(100% - @{banner-size})";
 	min-height: ~"calc(100% - @{banner-size})";
 	position: absolute;
