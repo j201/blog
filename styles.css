@@ -6,12 +6,17 @@ a {
   text-decoration: none;
   color: inherit;
 }
+html,
+body {
+  min-width: 500px;
+  height: 100%;
+}
 body {
   font-family: "Source Sans Pro", sans-serif;
   background-color: #009b86;
 }
 header {
-  height: 130px;
+  height: 120px;
   background-color: #009b86;
   font-family: "Roboto Slab", sans-serif;
 }
@@ -23,8 +28,8 @@ header nav {
   font-size: 1.7em;
   top: 0;
   right: 0;
-  height: 130px;
-  width: calc(100% - 150px);
+  height: 120px;
+  width: calc(100% - 170px);
 }
 header nav > div {
   position: absolute;
@@ -35,6 +40,8 @@ header > nav a {
   padding: 4px 8px;
   transition: background-color 0.2s;
   margin-right: 20px;
+  margin-top: 10px;
+  display: inline-block;
 }
 header > nav a:last-child {
   margin-right: 0;
@@ -46,7 +53,7 @@ header > nav a:hover {
 #title-box {
   height: 100%;
   font-weight: bold;
-  width: 150px;
+  width: 170px;
   background-color: #ffffff;
   position: relative;
   text-align: right;
@@ -60,11 +67,12 @@ header > nav a:hover {
   right: 15px;
 }
 #sidebar {
-  width: 150px;
+  width: 170px;
   color: rgba(255, 255, 255, 0.8);
   padding: 3px 0;
 }
 #sidebar h2 {
+  font-family: "Roboto Slab", sans-serif;
   font-size: 1.6em;
   margin: 4px 4px 8px 6px;
 }
@@ -75,7 +83,6 @@ header > nav a:hover {
 #sidebar a {
   color: white;
   display: inline-block;
-  transition: background-color 0.2s;
   padding: 2px 5px;
 }
 #sidebar a:hover {
@@ -83,10 +90,10 @@ header > nav a:hover {
 }
 #content {
   background-color: #ffffff;
-  width: calc(100% - 150px);
-  min-height: calc(100% - 130px);
+  width: calc(100% - 170px);
+  min-height: calc(100% - 120px);
   position: absolute;
-  top: 130px;
+  top: 120px;
   right: 0;
   padding: 10px;
   font-size: 15px;
@@ -106,4 +113,23 @@ header > nav a:hover {
 #content-inner {
   max-width: 700px;
   margin-left: 50px;
+  margin-right: 20px;
+}
+@media (max-width: 650px) {
+  #content {
+    left: 0;
+    min-width: 500px;
+    width: 100%;
+  }
+  #content-inner {
+    margin: 0 20px;
+  }
+  #title-box {
+    display: none;
+  }
+  header > nav {
+    left: 0;
+    min-width: 500px;
+    width: 100%;
+  }
 }

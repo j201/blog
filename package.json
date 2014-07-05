@@ -1,0 +1,23 @@
+{
+	"name": "j201-blog",
+	"version": "0.0.0",
+	"description": "",
+	"main": "build.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/j201/blog"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/j201/blog/issues"
+	},
+	"dependencies": {
+		"meta-marked": "~0.3.1",
+		"highlight.js": "~8.0.0",
+		"mustache": "~0.8.2",
+		"wrench": "~1.5.8"
+	}
+}
