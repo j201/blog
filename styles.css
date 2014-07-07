@@ -60,7 +60,7 @@ header > nav a:hover {
   font-size: 2em;
   color: #009b86;
 }
-#title-box > span {
+#title-box > a {
   position: absolute;
   bottom: 20px;
   width: 100%;
@@ -84,6 +84,7 @@ header > nav a:hover {
   color: white;
   display: inline-block;
   padding: 2px 5px;
+  width: 100%;
 }
 #sidebar a:hover {
   background-color: #00b49c;

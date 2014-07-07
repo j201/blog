@@ -1,6 +1,7 @@
 ---
 title: How to Shave a Goldfish
 date: July 6, 2014
+desc: A sample post
 ---
 
 Pasta ipsum dolor sit amet timpano capunti penne lisce trenne farfalline rigatoni mafaldine. Ricciutelle fusilli cellentani fettuccine spiralini trofie maccheroncelli tagliatelle. Tagliatelle lasagnette gigli penne lisce lumache fedelini spaghettini cavatelli sacchettoni calamaretti cencioni. Rotini calamaretti casarecce timpano sorprese lisce sorprese spaghetti lasagnette.
