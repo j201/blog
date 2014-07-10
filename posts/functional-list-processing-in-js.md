@@ -6,7 +6,7 @@ comments: true
 
 Many functional programming languages such as Scheme, Clojure and Haskell are heavily based on list processing, which has proved to be a useful approach for dealing with data and code alike. In particular, they tend to have a wide range of useful list processing functions that can simplify the use of lists while allowing them to replace constructs like loops. While JS doesn't share the elegance or theoretical purity of such languages, it took some cues from them in ES5 when the `map`, `reduce`, `reduceRight`, `some`, `every`, and `filter` functions were added to `Array.prototype`. These higher-order functions added flexibility, better scoping, and simplicity to programming techniques that were usually previously accomplished with `for` loops. JS is still lacking many of the useful features that functional languages use for creating and processing lists, but many of them can be implemented fairly easily in order to make it easier to use arrays and banish loops once and for all.
 
-##`range`, or list comprehensions without the sugar
+###`range`, or list comprehensions without the sugar
 
 Languages like Python and CoffeeScript have [list comprehensions](http://en.wikipedia.org/wiki/List_comprehension): terse syntaxes for making lists with given ranges and constraints. However, I agree with the LISP philosophy that you shouldn't solve such simple problems by throwing more syntax at them - existing syntax should be used instead. For example, Clojure uses a couple of regular functions to do the same thing: whereas you could write `(i * 5 for i in [1..5])` in CoffeeScript, the equivalent Clojure would look like `(for [i (range 1 6)] (* i 5))`, which justs uses function calls and a binding form, maintaining syntactic simplicity. Well, the same approach can be applied in JavaScript with the following helper function:
 
@@ -59,7 +59,7 @@ And there you have it: the `for` loop and loop comprehension killer. You'll occa
 
 More than any other function on this page, I'd like to see this implemented as a native function, `Array.range` perhaps. It's really the last piece in the puzzle to making full use of `forEach`, `map`, etc.
 
-## Zipping around
+### Zipping around
 
 ```javascript
 function zipWith(fn) {
@@ -104,7 +104,7 @@ zipWith(function(a, b) { return a === b; }, arr1, arr2).every(function(x) { retu
 
 And while we're talking about array equality,
 
-##Array equality
+###Array equality
 
 When you're using arrays as your main data structure, you need to be able to check whether one array has the same values as another. There are good reasons for arrays to be treated as unique for comparison operators, but you _will_ need an equation like this in order to do functional-style list processing. Note that this uses deep equality testing for arrays and shallow equality testing for other objects.
 
@@ -131,7 +131,7 @@ arraysEqual([1, 2, [3, 4, 5]], [1, 2, [3, 4, 5]]); // true
 arraysEqual([1, 2, [3, 4]], [1, 2, 3, 4]); // false
 ```
 
-##Repetition
+###Repetition
 
 `range` is by far the most useful list builder function, but sometimes it comes in handy to make a list that's just the same thing over and over again:
 
@@ -162,7 +162,7 @@ function rollDie(sides) {
 repeat(10, 6).map(rollDie).reduce(function(a, b) { return a + b; }); // 38 (for example)
 ```
 
-##Nesting and unnesting
+###Nesting and unnesting
 
 Last of all, it's often useful to deal with lists within lists, so here are a couple of functions for that. This first one returns a list split up into a sublists of a given length.
 
@@ -206,7 +206,7 @@ flatten([1, 2, [3, 4, [[[5]]]]]); // [1, 2, 3, 4, 5]
 flatten(repeat(4, range(2))); // [0, 1, 0, 1, 0, 1, 0, 1]
 ```
 
-##Conclusion
+###Conclusion
 
 The point of these functions isn't just to make list processing a bit less wordy; they allow you to manipulate lists in a completely different way. Instead of dealing with lists in they way you generally see in the functions themselves - changing an index variable to represent the current element, pushing and changing arrays of results, etc. - you can express most list functions in a single statement, with no variable modifications whatsoever. Then, you can build up list operations and eventually entire programs by combining such functions into other functions, without having to mentally keep track of variables changing state. It takes some getting used to, but it's a great way to program.
 
