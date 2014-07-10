@@ -116,6 +116,18 @@ header > nav a:hover {
   margin-left: 50px;
   margin-right: 20px;
 }
+#content .post-link h2 {
+  margin-bottom: 0;
+}
+.date {
+  font-size: 0.9em;
+}
+pre {
+  overflow: auto;
+  background-color: #fdf6e3;
+  border: 1px solid #009b86;
+  padding: 5px;
+}
 @media (max-width: 650px) {
   #content {
     left: 0;
