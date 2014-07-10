@@ -122,11 +122,15 @@ header > nav a:hover {
 .date {
   font-size: 0.9em;
 }
+code {
+  font-family: "Consolas", "Inconsolata", Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
+}
 pre {
   overflow: auto;
   background-color: #fdf6e3;
-  border: 1px solid #009b86;
+  border: 1px solid #bcaf8b;
   padding: 5px;
+  font-family: Consolas, Inconsolata, Menlo, Monaco, "Andale Mono", "Lucida Console", "Courier New", monospace;
 }
 @media (max-width: 650px) {
   #content {

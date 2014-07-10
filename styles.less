@@ -152,15 +152,18 @@ header > nav a {
 	font-size: 0.9em;
 }
 
-@code-bg: @accent;
+@code-bg: #fdf6e3;
 
-pre {
+code {
+	font-family: "Consolas", "Inconsolata",Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+}
+
+pre { // TODO: code-specific tag
 	overflow: auto;
-	background-color: #fdf6e3;
-	// box-shadow: 0 0 2px @code-bg;
-	border: 1px solid @accent;
-	// background: @code-bg;
+	background-color: @code-bg;
+	border: 1px solid desaturate(darken(@code-bg, 30%), 60%);
 	padding: 5px;
+	font-family: Consolas, Inconsolata, Menlo,Monaco, "Andale Mono", "Lucida Console", "Courier New", monospace;
 }
 
 @media (max-width: 650px) {
