@@ -102,6 +102,41 @@ In many ways, TypeScript's type syntax is limited and annoying to work with.
 	- types are limited to interfaces
 - no generics with lambdas
 
+####No Type Aliases
+
+When you're working with a structural type system, the names you give types don't actually matter, since type compatibility is determined by the structure of the types. So, if you have something like this:
+
+```typescript
+interface Foo {
+	a: number;
+	b: string;
+}
+```
+
+You're just declaring the name `Foo` to be equivalent to `{a: number; b: string;}`. So it would make sense to have a syntax like `type Foo = {a: number; b: string;};`. However, TypeScript went with a C#-ey interface syntax, which only allows type aliases for objects. So, there's no equivalent for these:
+
+```typescript
+type OscillatorType = string;
+type Deck = Set<Card>;
+type Comparator<T> = (a: T, b: T) => number;
+```
+
+(Actually you can do the last one, but the syntax is clunky and counter-intuitive.)
+
+So aside from being more complex and less flexible than something like `type`, `interface` is far less intuitive. It's as if TypeScript is in denial about using structural types.
+
+####Clunky Intersection Types
+
+A similar concept to union types are intersection types: where you specify that a value must satisfy two types. So, for example, if you have an argument to a function that must be a Thenable and a Runnable, you could ideally do something like `param: Thenable & Runnable`. You can do this in TS, but it's messy because it uses interfaces (which are clearly pretty overburdened):
+
+```typescript
+// Declare intersection type
+interface ThenableRunnable extends Thenable, Runnable {}
+
+// Only now can we use it
+var myFn : (param: ThenableRunnable) => Thenable;
+```
+
 ###"Classes"
 
 - Don't do that!
