@@ -139,9 +139,13 @@ var myFn : (param: ThenableRunnable) => Thenable;
 
 ###"Classes"
 
-- Don't do that!
-- `this` weirdness
-- Complect type declaration with behaviour
+The other main change that TypeScript makes is that it adds "classes" to JS. I'm using quotes because it doesn't actually add any new semantics: a TS class is equivalent to a JS constructor. It adds some sugar to make it look Java/C#-ey, but ultimately it's still just functions and prototypical objects.
+
+First of all, classes are the last feature I think should be added to JS. When we have higher order functions, we can construct much more powerful abstractions (see SICP/HTDP for this approach) rather than taking the messy, inflexible set of additions to C-ish structs that classes are. I understand that this is an argument I wouldn't win with many people, so I'm not going to go into depth, but [this post](http://raganwald.com/2014/03/31/class-hierarchies-dont-do-that.html) explains well why JS shouldn't have classes.
+
+Secondly, this leads you into the minefield that is `this`. Rather than `this` being bound like it is in Java/C#, it's generlly determined by the object the function is called from. This works to a certain extent when using prototypical inheritance, but in practice it leads to non-composable and unpredictable functions, as well as silliness like `Function.prototype.call.bind(Array.prototype.slice)`. It's not hard to avoid `this`, but TypeScript uses it enthusiastically in classes. That's further complicated by the fact that arrow functions have lexical `this` (it's the instance of the class that they're defined in, not the object they're called on), while methods and regular functions have JS's normal dynamic `this`. So this kind of messiness is a clear example of why classes don't translate well to JS.
+
+And lastly, classes complect type definitions with behaviour. I'm fine with them having inferred types, but often, in TypeScript code, one ends up being pushed into using classes in order to get the types of objects being easily shared between modules. Using interfaces or inference instead in non-classical code often results in longer code for defining types and having to use arcane features like ambient modules and TS's `typeof`. You shouldn't have to use a bad construct like classes in order to get convenient cross-module object typing.
 
 ###Forcing C#-iness
 
