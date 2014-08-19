@@ -4,6 +4,8 @@
 @banner-height: 120px;
 @banner-width: 200px;
 @min-width: 500px;
+@inline-code: #038;
+@code-bg: #fdf6e3;
 
 * {
 	-moz-box-sizing: border-box;
@@ -23,6 +25,24 @@ html, body {
 body {
 	font-family: "Source Sans Pro", sans-serif;
 	background-color: @accent;
+}
+
+code {
+	color: @inline-code;
+	font-family: "Consolas", "Inconsolata",Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+}
+
+pre { // TODO: code-specific tag
+	overflow: auto;
+	background-color: @code-bg;
+	border: 1px solid desaturate(darken(@code-bg, 30%), 60%);
+	padding: 3px 5px 5px 5px; // For some reason, the top padding appears bigger
+	font-family: Consolas, Inconsolata, Menlo,Monaco, "Andale Mono", "Lucida Console", "Courier New", monospace;
+
+	>code {
+		color: black;
+		font-size: 14px;
+	}
 }
 
 header {
@@ -142,9 +162,16 @@ p {
 	}
 
 	h3 {
-		font-size: 1.3em;
+		color: darken(@accent, 10%);
+		font-size: 1.5em;
 		margin-top: 10px;
 		margin-bottom: 8px;
+	}
+
+	h4 {
+		color: darken(@accent, 10%);
+		font-size: 1.3em;
+		margin-bottom: 3px;
 	}
 
 	li {
@@ -163,6 +190,17 @@ p {
 	margin-bottom: 0;
 }
 
+.post {
+	margin-bottom: 16px;
+
+	hr {
+		height: 1px;
+		border: 0;
+		background-color: darken(@accent, 10%);
+		margin-top: 27px;
+	}
+}
+
 .date {
 	font-size: 0.9em;
 }
@@ -172,21 +210,6 @@ p {
 	font-size: 0.9em;
 	margin-bottom: 15px;
 	display: inline-block;
-}
-
-@code-bg: #fdf6e3;
-
-code {
-	font-size: 14px;
-	font-family: "Consolas", "Inconsolata",Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
-}
-
-pre { // TODO: code-specific tag
-	overflow: auto;
-	background-color: @code-bg;
-	border: 1px solid desaturate(darken(@code-bg, 30%), 60%);
-	padding: 3px 5px 5px 5px; // For some reason, the top padding appears bigger
-	font-family: Consolas, Inconsolata, Menlo,Monaco, "Andale Mono", "Lucida Console", "Courier New", monospace;
 }
 
 @media (max-width: 700px) {

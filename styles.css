@@ -15,6 +15,21 @@ body {
   font-family: "Source Sans Pro", sans-serif;
   background-color: #009b86;
 }
+code {
+  color: #003388;
+  font-family: "Consolas", "Inconsolata", Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
+}
+pre {
+  overflow: auto;
+  background-color: #fdf6e3;
+  border: 1px solid #bcaf8b;
+  padding: 3px 5px 5px 5px;
+  font-family: Consolas, Inconsolata, Menlo, Monaco, "Andale Mono", "Lucida Console", "Courier New", monospace;
+}
+pre > code {
+  color: black;
+  font-size: 14px;
+}
 header {
   height: 120px;
   background-color: #009b86;
@@ -116,9 +131,15 @@ p {
   font-size: 2.5em;
 }
 #content h3 {
-  font-size: 1.3em;
+  color: #00685a;
+  font-size: 1.5em;
   margin-top: 10px;
   margin-bottom: 8px;
+}
+#content h4 {
+  color: #00685a;
+  font-size: 1.3em;
+  margin-bottom: 3px;
 }
 #content li {
   list-style-type: disc;
@@ -132,6 +153,15 @@ p {
 #content .post-link h2 {
   margin-bottom: 0;
 }
+.post {
+  margin-bottom: 16px;
+}
+.post hr {
+  height: 1px;
+  border: 0;
+  background-color: #00685a;
+  margin-top: 27px;
+}
 .date {
   font-size: 0.9em;
 }
@@ -140,17 +170,6 @@ p {
   font-size: 0.9em;
   margin-bottom: 15px;
   display: inline-block;
-}
-code {
-  font-size: 14px;
-  font-family: "Consolas", "Inconsolata", Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
-}
-pre {
-  overflow: auto;
-  background-color: #fdf6e3;
-  border: 1px solid #bcaf8b;
-  padding: 3px 5px 5px 5px;
-  font-family: Consolas, Inconsolata, Menlo, Monaco, "Andale Mono", "Lucida Console", "Courier New", monospace;
 }
 @media (max-width: 700px) {
   #content {
