@@ -73,6 +73,7 @@ posts.forEach(function(post) {
 		content: post.html
 	});
 	var allHTML = mustache(templates.master, {
+		title: post.meta.title,
 		postList: postListHTML,
 		content: postHTML
 	});
@@ -81,6 +82,7 @@ posts.forEach(function(post) {
 
 // archives page
 var archivesHTML = mustache(templates.master, {
+	title: "Archives",
 	postList: postListHTML,
 	content: posts.map(function(post) {
 		return mustache(templates.postLink, {
@@ -102,4 +104,8 @@ var homeContent = posts.map(function(post) {
 		date: post.meta.date
 	});
 }).reduce(function(a, b) { return a + b; });
-fs.writeFileSync("public/index.html", mustache(templates.master, {postList: postListHTML, content: homeContent}));
+fs.writeFileSync("public/index.html", mustache(templates.master, {
+	title: "j201's Blather",
+	postList: postListHTML,
+	content: homeContent
+}));

@@ -67,7 +67,7 @@ Yes, it's the same `Math` example. But it shows an important point: `with` can m
 
 ###Block Scope
 
-One oddity that makes JavaScript different from most C-style languages is the lack of block scope. Instead of local variables beings scoped to nearest block they're declared in (delimited by `{` and `}`), like in C or Java, JS variables are scoped to the nearest `function() {...}` in which they are declared. This is mostly fine (and in my opinion, not a problem at all if you use functional array iterators), but can be occasionally problematic.
+One oddity that makes JavaScript different from most C-style languages is the lack of block scope. Instead of local variables beings scoped to nearest block they're declared in (delimited by `{` and `}`), like in C or Java, JS variables are scoped to the nearest `function() {...}` in which they are declared. This is mostly fine (and in my opinion, not a problem at all if you use higher order array iterators), but can be occasionally problematic.
 
 A common issue in asynchronous JS is using callbacks in a loop:
 
@@ -84,7 +84,7 @@ for (var i = 0; i < 5; i++) {
 // 5
 ```
 
-So, since the `for` loop finished executing before the callbacks were executed, the value of `i` is 5 every time.  In other languages, to get around this, you'd just add a block-scoped variable for each iteration of the loop. In fact, this can be done right now in Firefox, but won't be standard until ES6 (see Solution 1 below). So, the standard solution is to wrap the whole thing in an [IIFE](http://en.wikipedia.org/wiki/IIFE) (see Solution 2) which is widely supported, but adds a lot of visual noise. The other solution, is to use `with` to emulate a block scope (Solution 3):
+So, since the `for` loop finished executing before the callbacks were executed, the value of `i` is 5 every time.  In other languages, to get around this, you'd just add a block-scoped variable for each iteration of the loop. In fact, this can be done right now in Firefox, but won't be standard until ES6 (see Solution 1 below). So, the standard solution is to wrap the whole thing in an [IIFE](http://en.wikipedia.org/wiki/IIFE) (see Solution 2) which is widely supported, but adds a lot of visual noise. The other solution is to use `with` to emulate a block scope (Solution 3):
 
 ``` javascript
 // Solution 1 - Elegant, but not widely supported

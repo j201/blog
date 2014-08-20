@@ -1,10 +1,11 @@
 @accent: #009B86;
-@title: white;
-@content: @title;
+@title: #f2f2f2;
+@content: #f2f2f2;
 @banner-height: 120px;
 @banner-width: 200px;
 @min-width: 500px;
-@inline-code: #038;
+@inline-code: #608;
+@links: #038;
 @code-bg: #fdf6e3;
 
 * {
@@ -152,9 +153,7 @@ p {
 	h1, h2 {
 		color: darken(@accent, 10%);
 		font-size: 2.2em;
-		margin-top: 15px;
-		margin-bottom: 10px;
-		display: inline;
+		display: inline-block;
 	} 
 
 	h1 {
@@ -184,6 +183,15 @@ p {
 	max-width: 700px;
 	margin-left: auto;
 	margin-right: auto;
+
+	h1+p, h2+p {
+		margin-top: 10px;
+	}
+
+	p>a {
+		color: @links;
+		text-decoration: underline;
+	}
 }
 
 #content .post-link h2 {
@@ -210,6 +218,11 @@ p {
 	font-size: 0.9em;
 	margin-bottom: 15px;
 	display: inline-block;
+}
+
+.spoiler:not(:hover), .spoiler:not(:hover) code {
+	background-color: #000;
+	color: #000;
 }
 
 @media (max-width: 700px) {

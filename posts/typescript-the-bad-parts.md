@@ -124,7 +124,7 @@ type Deck = Set<Card>;
 type Comparator<T> = (a: T, b: T) => number;
 ```
 
-(Actually you can do the last one, but the syntax is clunky and counter-intuitive.)
+(Actually you can do the last one using `interface`, but the syntax is clunky and bizarre.)
 
 So aside from being more complex and less flexible than something like `type`, `interface` is far less intuitive. It's as if TypeScript is in denial about using structural types.
 
