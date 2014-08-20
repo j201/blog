@@ -95,7 +95,7 @@ In many ways, TypeScript's type syntax is limited and annoying to work with.
 
 Function type signatures should be pretty simple, right? You just need something like `(number, string) => string`, maybe with corresponding syntax for rest and optional parameters. Well, unfortunately, TS overcomplicates this. First of all, function parameters need to be named in the type, not just in the function literal. Not only is this unusual and redundant, it often leads to devs writing things like `(n: number, s:string) => string` and creating useless noise. 
 
-The other bizarreness is that there are three different ways to define a function type. 
+The other bizarreness is that there are three different ways to define a function type, but you can't always use all three, depending on context. 
 
 ```
 map: <U>(f: (el: T) => U) => Box<U>;
@@ -103,11 +103,7 @@ map<U>(f: (el: T) => U): Box<U>;
 map: {<U>(f: (el: T) => U): Box<U>};
 ```
 
-- different ways to define functions
-- requirement to name arguments
-- interfaces instead of intersection types
-- lack of arbitrary type aliases
-	- types are limited to interfaces
+So, TypeScript function typing is far more complicated than it needs to be
 
 ####No Type Aliases
 
