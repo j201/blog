@@ -13,6 +13,10 @@ function copyFileSync(from, to) {
 	fs.writeFileSync(to, fs.readFileSync(from, { encoding: 'utf8' }));
 }
 
+function escapeFileName(name) {
+	return name.replace(/[<>:""\/\\|\?\*\u0000-\u001f]/g, '').replace(/[\. ]+$/, '');
+}
+
 metaMarked.setOptions({
 	highlight: function (code, lang) {
 		return lang ? 
@@ -37,7 +41,7 @@ var posts = fs.readdirSync('posts').map(function(post) {
 	return parseDate(b.meta.date).unix() - parseDate(a.meta.date).unix();
 }).map(function(post) {
 	post.date = parseDate(post.meta.date);
-	post.url = "/posts/" + post.date.format("YYYY-MM-DD") + "-" + post.meta.title.replace(/\s+/g, '-') + ".html";
+	post.url = "/posts/" + post.date.format("YYYY-MM-DD") + "-" + escapeFileName(post.meta.title.replace(/\s+/g, '-')) + ".html";
 	return post;
 });
 
@@ -72,7 +76,7 @@ posts.forEach(function(post) {
 		postList: postListHTML,
 		content: postHTML
 	});
-	fs.writeFileSync("public" + post.url, allHTML);
+	fs.writeFileSync("public/" + post.url, allHTML);
 });
 
 // archives page
