@@ -4,15 +4,15 @@ date: July 11, 2014
 published: true
 ---
 
-[TypeScript](http://www.typescriptlang.org/) is Microsoft's attempt to bring type checking to the Wild West of JS. It also brings features such as arrow functions and "classes" inspired by ES6 spec drafts. After working with it for a while, I feel it has some nice bits, but on the whole is sorely lacking. It seems to be trying to turn JS into C# while ignoring the drawbacks and limitations of that approach. Here I'd like to go through the major features of TypeScript and identify how it got them wrong.
+[TypeScript](http://www.typescriptlang.org/) is Microsoft's attempt to bring type checking to the Wild West of JS. It also brings features such as arrow functions and "classes" inspired by ES6 spec drafts. After working with it for a while, I feel it has some nice bits, but on the whole it's sorely lacking. It seems to be trying to turn JS into C# while ignoring the drawbacks and limitations of that approach. Here I'd like to go through the major features of TypeScript and identify how it got them wrong.
 
 ###Inexpressive Types
 
-Despite having structural types (yay!), TS has a remarkably inflexible type system. It's lacking many powerful features that are common in modern structural type systems, which reduces its ability to model and verify JS programs. However, TypeScript has an even greater requirement in that it must be able to describe the types of existing JS code, which includes functions that wouldn't be allowed in many strongly typed languages. Even though this is difficult, TS could have done a far better job.
+Despite having structural types (yay!), TS has a remarkably inflexible type system. It's lacking many powerful features that are common in modern structural type systems, which reduces its ability to model and verify programs. However, TypeScript has an even greater requirement in that it must be able to describe the types of existing JS code, which includes functions that wouldn't be allowed in many strongly typed languages. Even though this is difficult, TS falls short.
 
 ####Union Types
 
-The feature I find the most lacking is union types: where a value can be considered to be one of two types. This is so common in JS that I can't understand why TypeScript wouldn't include it. Sure, you can implement an `Either<TLeft, TRight>` type in TS, but the lack of native support forces the use of `any` [in](https://github.com/borisyankov/DefinitelyTyped/blob/9d88dadf44aaedcabde88053342617575a851f39/easeljs/easeljs.d.ts#L100) [many](https://github.com/borisyankov/DefinitelyTyped/blob/52b37e40fa69c6a57b09578305827294a7c24f36/iscroll/iscroll-5.d.ts#L38) [cases](https://github.com/borisyankov/DefinitelyTyped/blob/dd35f69637817e3f7f8fb23b8d4b033885ad32cd/fancybox/fancybox.d.ts#L100), which removes type verification. One of the first bugs I had to deal with in TypeScript was caused by an Underscore function that returned a number or a given generic type, but the TypeScript annotation simply said that it returned the generic type (a problem that [still exists](https://github.com/borisyankov/DefinitelyTyped/issues/1513)). This problem [has been raised](https://typescript.codeplex.com/workitem/1364), but there doesn't seem to be any interest from the devs, possibly because it's a feature that's alien to languages like C# and Java.
+The feature I find the most lacking is union types: where a value can be considered to be one of two types. This is so common in JS that I can't understand why TypeScript wouldn't include it. Sure, you can implement an `Either<TLeft, TRight>` type in TS, but the lack of native support forces the use of `any` [in](https://github.com/borisyankov/DefinitelyTyped/blob/9d88dadf44aaedcabde88053342617575a851f39/easeljs/easeljs.d.ts#L100) [many](https://github.com/borisyankov/DefinitelyTyped/blob/52b37e40fa69c6a57b09578305827294a7c24f36/iscroll/iscroll-5.d.ts#L38) [cases](https://github.com/borisyankov/DefinitelyTyped/blob/dd35f69637817e3f7f8fb23b8d4b033885ad32cd/fancybox/fancybox.d.ts#L100), which removes type verification. One of the first bugs I had to deal with in TypeScript was caused by an Underscore function that returned a number or a given generic type, but the TypeScript annotation simply said that it returned the generic type (a bug that [still exists](https://github.com/borisyankov/DefinitelyTyped/issues/1513)). This problem [has been raised](https://typescript.codeplex.com/workitem/1364), but there doesn't seem to be any interest from the devs, possibly because it's a feature that's alien to languages like C# and Java.
 
 ####Higher-kinded Types
 
@@ -66,7 +66,7 @@ function list<T>(): Sequence<T> {
 }
 ```
 
-So our sequence type just extended Mappable and automatically got a definition for a map function that takes a `T => U` function and returns a `Sequence<U>`. This is nice for concisenesss and it enables us to write functions that can take any `Mappable` or a similar type and handle them without having to know the underlying implementation. There's just one problem: TypeScript can't do that. More specifically, it doesn't allow nested generics like `Mappable<Box<T>>`, where `Box` and `T`	aren't known by `Mappable`. Instead, we must write `Mappable<T>` where the type signature of `map<U>` is `(f: (t: T) => U) => Mappable<U>`. That means that something extending `Mappable` doesn't have to return the same `Box` type. For example, our sequence's map function could return a promise, an `Either`, a tree, or any other value as long as it implemented `Mappable`. Also, the expression `l.map(f).cons(f(e))` would cause a type error because TS wouldn't know that `l.map(f)` returns a sequence rather than an unspecified `Mappable`. This a violation of type safety, a failure to represent `map` generically, and, more importantly, it prevents us from encoding useful abstractions like Mappable.
+So our sequence type just extended Mappable and automatically got a definition for a map function that takes a `T => U` function and returns a `Sequence<U>`. This is nice for concisenesss and it enables us to write functions that can take any `Mappable` or a similar type and handle them without having to know the underlying implementation. There's just one problem: TypeScript can't do this. More specifically, it doesn't allow nested generics like `Mappable<Box<T>>`, where `Box` and `T`	aren't known by `Mappable`. Instead, we must write `Mappable<T>` where the type signature of `map<U>` is `(f: (t: T) => U) => Mappable<U>`. That means that something extending `Mappable` doesn't have to return the same `Box` type. For example, our sequence's map function could return a promise, an `Either`, a tree, or any other value as long as it implemented `Mappable`. Also, the expression `l.map(f).cons(f(e))` would cause a type error because TS wouldn't know that `l.map(f)` returns a sequence rather than an unspecified `Mappable`. This a violation of type safety, a failure to represent `map` generically, and, more importantly, it prevents us from encoding useful abstractions like Mappable.
 
 ####Failure to Model JS Values
 
@@ -89,8 +89,6 @@ And TypeScript won't bat an eyelid. In any real JS program, this represents a hu
 
 ###Annoying Type Syntax
 
-In many ways, TypeScript's type syntax is limited and annoying to work with.
-
 ####Functions
 
 Function type signatures should be pretty simple, right? You just need something like `(number, string) => string`, maybe with corresponding syntax for rest and optional parameters. Well, unfortunately, TS overcomplicates this. First of all, function parameters need to be named in the type, not just in the function literal. Not only is this unusual and redundant, it often leads to devs writing things like `(n: number, s:string) => string` and creating useless noise. 
@@ -103,7 +101,7 @@ map<U>(f: (el: T) => U): Box<U>;
 map: {<U>(f: (el: T) => U): Box<U>};
 ```
 
-So, TypeScript function typing is far more complicated than it needs to be
+So, TypeScript function typing is far more complex than it needs to be.
 
 ####No Type Aliases
 
@@ -124,7 +122,7 @@ type Deck = Set<Card>;
 type Comparator<T> = (a: T, b: T) => number;
 ```
 
-(Actually you can do the last one using `interface`, but the syntax is clunky and bizarre.)
+(Actually you can do the last one using `interface`, but the syntax is clunky and weird.)
 
 So aside from being more complex and less flexible than something like `type`, `interface` is far less intuitive. It's as if TypeScript is in denial about using structural types.
 
@@ -146,7 +144,7 @@ The other main change that TypeScript makes is that it adds "classes" to JS. I'm
 
 First of all, classes are the last feature I think should be added to JS. When we have higher order functions, we can construct much more powerful abstractions (see SICP/HTDP for this approach) rather than taking the messy, inflexible set of additions to C-ish structs that classes are. I understand that this is an argument I wouldn't win with many people, so I'm not going to go into depth, but [this post](http://raganwald.com/2014/03/31/class-hierarchies-dont-do-that.html) explains well why JS shouldn't have classes.
 
-Secondly, this leads you into the minefield that is `this`. Rather than `this` being bound like it is in Java/C#, it's generlly determined by the object the function is called from. This works to a certain extent when using prototypical inheritance, but in practice it leads to non-composable and unpredictable functions, as well as silliness like `Function.prototype.call.bind(Array.prototype.slice)`. It's not hard to avoid `this`, but TypeScript uses it enthusiastically in classes. That's further complicated by the fact that arrow functions have lexical `this` (it's the instance of the class that they're defined in, not the object they're called on), while methods and regular functions have JS's normal dynamic `this`. So this kind of messiness is a clear example of why classes don't translate well to JS.
+Secondly, this leads you into the minefield that is `this`. Rather than `this` being bound like it is in Java/C#, it's generlly determined by the object the function is called from. This works to a certain extent when using prototypical inheritance, but in practice it leads to non-composable and unpredictable functions, as well as silliness like `Function.prototype.call.bind(Array.prototype.slice)`. It's not hard to avoid `this`, but TypeScript uses it enthusiastically in classes. That's further complicated by the fact that arrow functions have lexical `this` (it's the instance of the class that they're defined in, not the object they're called on), while method-like functions and regular functions have JS's normal dynamic `this`. So this kind of messiness is a clear example of why classes don't translate well to JS.
 
 And lastly, classes complect type definitions with behaviour. I'm fine with them having inferred types, but often, in TypeScript code, one ends up being pushed into using classes in order to get the types of objects being easily shared between modules. Using interfaces or inference instead in non-classical code often results in longer code for defining types and having to use arcane features like ambient modules and TS's `typeof`. You shouldn't have to use a bad construct like classes in order to get convenient cross-module object typing.
 
@@ -156,4 +154,4 @@ So the recurring theme here is that the TS developers have repeatedly chosen C#-
 
 So, if you consider lack of type safety to be JS's largest deficiency, TypeScript isn't an adequate solution. If you want ES6 features, TypeScript isn't an adequate solution, since it only has a few of them. And if you want classes like C# (ugh), then TypeScript isn't an adequate solution, since its classes are a thin film of sugar over totally different semantics. It only really works if you want a half-assed implementation of all three.
 
-What I'd like to see instead is something like [clojure.core.typed](http://typedclojure.org) for JS. That is, something that only provides type annotation and type checking but that is designed to accomodate the way the language is written and therefore allows a far wider range of types. Not being based on a C#-ey type system would also allow the inclusion of more powerful type features such as higher-kinded types. Note that such a checker could use special comments, meaning that it could work with normal JS files. In short, a type checker that does one thing and does it well.
+What I'd like to see instead is something like [clojure.core.typed](http://typedclojure.org) for JS. That is, something that only provides type annotation and type checking but that is designed to accomodate the way the language is written and therefore allows a far wider range of types. Not being based on a C#-ey type system would also allow the inclusion of more powerful type features such as higher-kinded types. Note that such a checker could use special comments for annotations, meaning that it could work with normal JS files. In short, a type checker that does one thing and does it well.

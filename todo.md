@@ -2,6 +2,7 @@
 
 - favicon
 - ga
+- replace disqus shortname?
 
 ##Cool Future Features
 
