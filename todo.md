@@ -2,7 +2,8 @@
 
 - favicon
 - ga
-- replace disqus shortname?
+- update ts post date
+- post subtitles
 
 ##Cool Future Features
 

@@ -10,7 +10,7 @@ function readFile(file) {
 }
 
 function copyFileSync(from, to) {
-	fs.writeFileSync(to, fs.readFileSync(from, { encoding: 'utf8' }));
+	fs.writeFileSync(to, fs.readFileSync(from));
 }
 
 function escapeFileName(name) {
@@ -54,9 +54,15 @@ var templates = {
 	// projects: readFile("templates/projects.html")
 };
 
+// CSS
 copyFileSync("styles.css", "public/styles.css");
 copyFileSync("reset.css", "public/reset.css");
 copyFileSync("solarized_light.css", "public/solarized_light.css");
+
+// Favicons
+fs.readdirSync("favicons").forEach(function(file) {
+	copyFileSync("favicons/" + file, "public/" + file);
+});
 
 // post list
 var postListHTML = "<ul>" + posts.map(function(post) {
