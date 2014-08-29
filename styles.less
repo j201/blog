@@ -7,6 +7,7 @@
 @inline-code: #608;
 @links: #038;
 @code-bg: #fdf6e3;
+@faded: fade(white, 80%);
 
 * {
 	-moz-box-sizing: border-box;
@@ -54,7 +55,7 @@ header {
 	nav {
 		display: inline-block;
 		position: absolute;
-		color: fade(white, 80%);
+		color: @faded;
 		text-align: center;
 		font-size: 1.7em;
 		top: 0;
@@ -98,11 +99,23 @@ p {
 	background-color: @title;
 	position: absolute;
 	clip: rect(0, @banner-width, @banner-height, 0);
+	z-index: 20;
+}
+
+#sidebar-topper {
+	width: @banner-width;
+	margin: 0;
+	position: fixed;
+	top: @banner-height - 2px;
+	z-index: 1;
+	border: none;
+	height: 1px;
+	background-color: @faded;
 }
 
 #sidebar {
 	width: @banner-width;
-	color: fade(white, 80%);
+	color: @faded;
 	padding: 5px 7px;
 	position: fixed;
 	overflow: hidden;
@@ -146,7 +159,7 @@ p {
 }
 
 a#under-title { //specificity
-	color: fade(white, 80%);
+	color: @faded;
 	font-family: "Roboto Slab", sans-serif;
 	width: auto;
 	padding: 0;

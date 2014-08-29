@@ -1,7 +1,5 @@
 ##Immediate
 
-- favicon
-- ga
 - update ts post date
 - post subtitles
 - projects page
