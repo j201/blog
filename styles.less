@@ -92,28 +92,20 @@ p {
 }
 
 #title-box {
-	height: 100%;
+	height: @banner-height;
 	font-weight: bold;
 	width: @banner-width;
 	background-color: @title;
-	position: relative;
-	text-align: right;
-	font-size: 2em;
-	color: @accent;
-
-	> a {
-		position: absolute;
-		bottom: 20px;
-		width: 100%;
-		right: 25px;
-	}
-
+	position: absolute;
+	clip: rect(0, @banner-width, @banner-height, 0);
 }
 
 #sidebar {
 	width: @banner-width;
 	color: fade(white, 80%);
 	padding: 5px 7px;
+	position: fixed;
+	overflow: hidden;
 
 	h2 {
 		font-family: "Roboto Slab", sans-serif;
@@ -135,6 +127,33 @@ p {
 		&:hover {
 			background-color: lighten(@accent, 5%);
 		}
+	}
+}
+
+#over-title, #under-title {
+	text-align: right;
+	font-weight: bold;
+	font-size: 2em;
+	position: fixed;
+	top: 38px;
+	left: 65px;
+}
+
+#over-title {
+	color: @accent;
+	z-index: 20;
+	position: fixed;
+}
+
+a#under-title { //specificity
+	color: fade(white, 80%);
+	font-family: "Roboto Slab", sans-serif;
+	width: auto;
+	padding: 0;
+	z-index: 10;
+
+	&:hover {
+		background-color: transparent;
 	}
 }
 
@@ -223,6 +242,10 @@ p {
 .spoiler:not(:hover), .spoiler:not(:hover) code {
 	background-color: #000;
 	color: #000;
+}
+
+#content .post-desc {
+	margin: 0 0 5px 0;
 }
 
 @media (max-width: 700px) {

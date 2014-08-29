@@ -1,6 +1,7 @@
 ---
 title: Expressing Yourself
 date: April 20, 2014
+desc: "What 'expressive programming' means and how your language can help"
 comments: true
 ---
 

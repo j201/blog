@@ -4,6 +4,7 @@
 - ga
 - update ts post date
 - post subtitles
+- projects page
 
 ##Cool Future Features
 

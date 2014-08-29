@@ -69,25 +69,19 @@ p {
   margin-bottom: 20px;
 }
 #title-box {
-  height: 100%;
+  height: 120px;
   font-weight: bold;
   width: 200px;
   background-color: #f2f2f2;
-  position: relative;
-  text-align: right;
-  font-size: 2em;
-  color: #009b86;
-}
-#title-box > a {
   position: absolute;
-  bottom: 20px;
-  width: 100%;
-  right: 25px;
+  clip: rect(0, 200px, 120px, 0);
 }
 #sidebar {
   width: 200px;
   color: rgba(255, 255, 255, 0.8);
   padding: 5px 7px;
+  position: fixed;
+  overflow: hidden;
 }
 #sidebar h2 {
   font-family: "Roboto Slab", sans-serif;
@@ -106,6 +100,30 @@ p {
 }
 #sidebar a:hover {
   background-color: #00b49c;
+}
+#over-title,
+#under-title {
+  text-align: right;
+  font-weight: bold;
+  font-size: 2em;
+  position: fixed;
+  top: 38px;
+  left: 65px;
+}
+#over-title {
+  color: #009b86;
+  z-index: 20;
+  position: fixed;
+}
+a#under-title {
+  color: rgba(255, 255, 255, 0.8);
+  font-family: "Roboto Slab", sans-serif;
+  width: auto;
+  padding: 0;
+  z-index: 10;
+}
+a#under-title:hover {
+  background-color: transparent;
 }
 #content {
   background-color: #f2f2f2;
@@ -181,6 +199,9 @@ p {
 .spoiler:not(:hover) code {
   background-color: #000;
   color: #000;
+}
+#content .post-desc {
+  margin: 0 0 5px 0;
 }
 @media (max-width: 700px) {
   #content {
