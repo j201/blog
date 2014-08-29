@@ -223,7 +223,9 @@ a#under-title:hover {
   #content-inner {
     margin: 0 20px;
   }
-  #title-box {
+  #title-box,
+  a#under-title,
+  #sidebar-topper {
     display: none;
   }
   header > nav {
