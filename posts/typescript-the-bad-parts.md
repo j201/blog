@@ -1,6 +1,7 @@
 ---
 title: "TypeScript: The Bad Parts"
-date: July 11, 2014
+date: August 30, 2014
+desc: "Why Microsoft's TypeScript isn't all it's cracked up to be"
 published: true
 ---
 

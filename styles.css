@@ -103,13 +103,13 @@ p {
   margin-bottom: 6px;
   font-size: 0.95em;
 }
-#sidebar a {
+#sidebar li > a {
   color: white;
   display: inline-block;
   padding: 2px 5px;
   width: 100%;
 }
-#sidebar a:hover {
+#sidebar li > a:hover {
   background-color: #00b49c;
 }
 #over-title,
@@ -177,8 +177,7 @@ a#under-title:hover {
   margin-left: auto;
   margin-right: auto;
 }
-#content-inner h1 + p,
-#content-inner h2 + p {
+#content-inner h1 + p {
   margin-top: 10px;
 }
 #content-inner p > a {
@@ -187,6 +186,9 @@ a#under-title:hover {
 }
 #content .post-link h2 {
   margin-bottom: 0;
+}
+.project-desc {
+  margin-top: 2px;
 }
 .post {
   margin-bottom: 16px;

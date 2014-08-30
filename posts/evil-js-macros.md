@@ -1,6 +1,7 @@
 ---
 title: "Evil JS: Macros"
 date: June 16, 2013
+desc: "Living dangerously with Function.prototype.toString() and eval()"
 comments: true
 ---
 

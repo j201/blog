@@ -1,6 +1,7 @@
 ---
 title: Functional List Processing in JS
 date: September 27, 2013
+desc: "Simple, clear, and powerful ways to process arrays"
 comments: true
 ---
 

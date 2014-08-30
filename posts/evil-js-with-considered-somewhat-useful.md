@@ -1,6 +1,7 @@
 ---
 title: "Evil JS: With Considered Somewhat Useful"
 date: August 3, 2013
+desc: "Why `with` isn't as awful as you think"
 comments: true
 ---
 

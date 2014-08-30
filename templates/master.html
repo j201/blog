@@ -27,7 +27,7 @@
 	<body>
 		<header>
 			<div id="title-box"><a href="/" id="over-title">j201's<br>Blather</a></div><nav>
-				<div>
+				<div id="top-links">
 					<a href="/archives.html">Archives</a>
 					<a href="/projects.html">Projects</a>
 					<a href="https://github.com/j201">Github</a>
@@ -37,11 +37,13 @@
 		<hr id="sidebar-topper">
 		<nav id="sidebar">
 			<a href="/" id="under-title">j201's<br>Blather</a>
-			<h2>Posts</h2>
+			<a href="/archives.html"><h2 class="sidebar-title">Posts</h2></a>
 			{{{postList}}}
 		</nav><div id="content">
 			<div id="content-inner">{{{content}}}</div>
 		</div>
+
+		<script type="text/javascript" src="/main.js"></script>
 
 		<!-- Disqus -->
 		<script type="text/javascript">

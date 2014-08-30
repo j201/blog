@@ -1,6 +1,7 @@
 ---
 title: JS Object Literal Inheritance
 date: June 22, 2013
+desc: "A more convenient way to inherit from JS objects"
 comments: true
 ---
 

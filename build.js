@@ -50,8 +50,8 @@ var templates = {
 	post: readFile("templates/post.html"),
 	postLink: readFile("templates/post-link.html"),
 	postListEntry: readFile("templates/post-list-entry.html"),
-	homePost: readFile("templates/home-post.html")
-	// projects: readFile("templates/projects.html")
+	homePost: readFile("templates/home-post.html"),
+	projects: readFile("templates/projects.html")
 };
 
 // CSS
@@ -64,8 +64,11 @@ fs.readdirSync("favicons").forEach(function(file) {
 	copyFileSync("favicons/" + file, "public/" + file);
 });
 
+// js
+copyFileSync("main.js", "public/main.js");
+
 // post list
-var postListHTML = "<ul>" + posts.map(function(post) {
+var postListHTML = "<ul id=\"post-list\">" + posts.map(function(post) {
 	return mustache(templates.postListEntry, {
 		title: post.meta.title,
 		url: post.url
@@ -100,6 +103,14 @@ var archivesHTML = mustache(templates.master, {
 	}).reduce(function(a, b) { return a + b; })
 });
 fs.writeFileSync("public/archives.html", archivesHTML);
+
+// projects page
+var projectsHTML = mustache(templates.master, {
+	title: "Projects",
+	postList: postListHTML,
+	content: templates.projects
+});
+fs.writeFileSync("public/projects.html", projectsHTML);
 
 // home page
 var homeContent = posts.map(function(post) {
