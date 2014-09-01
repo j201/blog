@@ -138,11 +138,11 @@ a#under-title:hover {
 }
 #content {
   background-color: #f2f2f2;
-  width: calc(100% - 200px);
   min-height: calc(100% - 120px);
   position: absolute;
   top: 120px;
   right: 0;
+  left: 200px;
   padding: 20px;
   padding-right: 30px;
   font-size: 15px;
