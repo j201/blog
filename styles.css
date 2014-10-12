@@ -68,6 +68,9 @@ header > nav a:hover {
 p {
   margin-bottom: 20px;
 }
+em {
+  font-style: italic;
+}
 #title-box {
   height: 120px;
   font-weight: bold;
