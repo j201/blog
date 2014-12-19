@@ -1,4 +1,9 @@
-#You Might Be Doing Polymorphism Wrong
+---
+title: "You Might Be Doing Polymorphism Wrong"
+date: TODO
+desc: ""
+published: false
+---
 
 I think a concise statement of the goal of Object Oriented Programming would be that it's about linking specific kinds of data to functions (methods). This allows the methods to be polymorphic in that they will have different definitions based on the data given to them. So, there are three components to this that the programmer has to establish:
 

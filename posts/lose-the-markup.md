@@ -1,4 +1,9 @@
-#Lose the Markup
+---
+title: "Lose the Markup"
+date: TODO
+desc: ""
+published: false
+---
 
 JS frameworks are moving in two directions these days. On one side, you have a push to make HTML documents capable of representing the kinds of complex elements that are used in web applications. Angular, Knockout, Polymer, and Web Components all subscribe to this approach. On the other side, you have frameworks that give up on markup templates and represent UIs programmatically. This camp includes React, Mercury, Mithril, and Elm.
 
