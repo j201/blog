@@ -5,6 +5,8 @@ desc: "Why Microsoft's TypeScript isn't all it's cracked up to be"
 published: true
 ---
 
+**Update - Dec. 18, 2014**: TypeScript [will fixing many of these issues in v1.4.](http://blogs.msdn.com/b/typescript/archive/2014/11/18/what-s-new-in-the-typescript-type-system.aspx). That said, I'm more excited now about Facebook's [Flow type checker](http://flowtype.org/), since it's more full-featured than TypeScript right now, even though it was just released, it seems more focused on expressive JS-oriented type checking than TypeScript, and the devs seem more engaged with the community.
+
 [TypeScript](http://www.typescriptlang.org/) is Microsoft's attempt to bring type checking to the Wild West of JS. It also brings features such as arrow functions and "classes" inspired by ES6 spec drafts. After working with it for a while, I feel it has some nice bits, but on the whole it's sorely lacking. It seems to be trying to turn JS into C# while ignoring the drawbacks and limitations of that approach. Here I'd like to go through the major features of TypeScript and identify how it got them wrong.
 
 ###Inexpressive Types
