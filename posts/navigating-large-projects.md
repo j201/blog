@@ -1,16 +1,17 @@
 Navigation methods:
-- Cycle: <C-J/K>
-- Jump to: <n><C-J/K>
+- y Cycle: <C-J/K>
+- y Jump to: <n><C-J/K>
 - Jump to definition: <C-]>
-- By name: :b ...
-- By number: <n><C-6>
+- y By name: :b ...
+- y By number: <n><C-6>
 - By jumps: <C-O/I>
 - By MRU buffers: <C-M/N>
-- Searching: -o/p...
+- y Searching: -o/p...
 - Grepping: <Space>gg
-- MRU files
-- Opening in the same folder \eh
-- unite buffers
+- y MRU files
+- y Opening in the same folder \eh
+- y unite buffers
+- gf
 
 #Navigating Large Projects Without Thinking Hard
 
@@ -35,5 +36,15 @@ Another situation that allows you to take a shortcut is when you know that you w
 ```
 
 ##Buffers
+
+In terms of navigation, buffers (generally called "open files" outside of vim/emacs/etc.) are a set of files relevant to your current task. Of course they have other uses, but for the sake of navigation, we can see them as special targets that you should be able to get to more quickly than unopened files, since they're more likely to be needed. On top of this, there should be fast ways to get to buffers that are particularly likely to be needed, such as recently accessed buffers.
+
+I have `<C-J>` and `<C-K>` mapped to go to the next buffer and the previous buffer respectively (for non-vimmers, `<C-J>` means `Ctrl+J`). This provides a quick way to access buffers that were opened around the same time as the current one, which is one indication that they're more likely to be needed and therefore should be more accessible. These mappings can also be used with a number; for example, using `3<C-J>` will go three buffers ahead in the list. However, the more buffers you have open, the less practical this approach is. A random-access way to get to buffers is needed in these casses
+
+Vim provides the `:b` command for this use case, which takes either the name of the buffer, a partial name that uniquely identifies the buffer, or the buffer number. I don't use it much. Giving the name of the buffer takes too long, finding a partial match that would work takes too much thinking, and accessing a buffer by number can be done faster using `{buffer #}<C-^>` (I use `<C-6>`, which is the same thing for vim). In order to leverage this as a way to get to any buffer quickly, I keep a persistent list of open buffers in a small pane on the left side of my screen. TODO: image I find it's generally faster to scan the list for a buffer and access it by number than accessing by name. Having a list that opens up on command would take too long and I have the screen size to spare. I find that I also get used to where a buffer is in the list so I can quickly find its number visually (some people end up remembering buffer numbers, but I find that difficult). And finally, this makes using `<C-J>` and `<C-K>` with a count, like I described above, more useful since I can see where I'll end up if I go, say, 2 buffers forward in the list.
+
+It's worth noting that when I do want to access a buffer by name, for example if I have many buffers with a similar name open and I don't want to waste time looking closely at my buffer list, I'll use `-b`, which opens up unite like I described above for files, but with a list of current buffers instead, which I can then filter and select from. (The great thing about unite is that it's agnostic about what kind of information it lists, so it can let you select from many useful lists.)
+
+TODO: MRU buffers
 
 ##Content-based Navigation
