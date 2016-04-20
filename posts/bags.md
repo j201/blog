@@ -17,6 +17,7 @@ A basic bag interface might only expose `add` and `remove` operations, aside fro
 
 This table shows basic asymptotic average case performance and tasks where bags differ substantially from lists and sets. It assumes implementation with a hash map from values to multiplicities.
 
+TODO: highlight
 || Hash bags | Arrays | Linked Lists | Hash sets
 --- | --- | --- | --- | ---
 Random insert/delete | O(1) | O(n) | O(n) | O(1)
@@ -28,6 +29,22 @@ Unique values | O(1) | O(n) | O(n) | O(1)
 
 ##Example: prime factors
 
+A basic example of using bags is getting the prime factors of a number. For instance, the prime factorization of 149688 is 2²⋅3⁵⋅7⋅11². For the general case in high-level programming, I would argue that a bag containing {2, 2, 3, 3, 3, 3, 3, 7, 11, 11} is the best way to represent this. This is a simplistic example where the performance advantages and disadvantages of bags don't come into play much, but it demonstrates these differences as well as semantic differences.
+
+Prime factorization functions generally return lists. For instance, calling `factor(149688)` in Matlab or Octave will return a vector `[2, 2, 3, 3, 3, 3, 3, 7, 11, 11]`. This approach has the advantage of returning the values in a sorted order. However, determining whether a value is present or its multiplicity is an O(n) operation. For dealing with prime factors, these are common tasks. Furthermore, these operations, although immediately available for hash bags, are often not part of the list API (which is the case in Matlab) as they aren't fast and, in the case of multiplicity, are uncommon in interacting with lists in general.
+
+TODO: semantic advantages of bags
+
+It's worth noting that in languages with lazy evaluation or lazy lists, it's reasonable for functions like this to return lazy lists that can be collected into bags (since they represent incomplete computations where the computations occur in some order and not necessarily the structure of data). See 'Lazy bags' below.
+
 ##Example: statistical data
 
 ##The case for bags
+
+##A note on persistence
+
+##Appendix: Special bags
+
+###Lazy bags
+
+###Sorted bags
