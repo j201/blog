@@ -29,17 +29,33 @@ Unique values | O(1) | O(n) | O(n) | O(1)
 
 ##Example: prime factors
 
-A basic example of using bags is getting the prime factors of a number. For instance, the prime factorization of 149688 is 2²⋅3⁵⋅7⋅11². For the general case in high-level programming, I would argue that a bag containing {2, 2, 3, 3, 3, 3, 3, 7, 11, 11} is the best way to represent this. This is a simplistic example where the performance advantages and disadvantages of bags don't come into play much, but it demonstrates these differences as well as semantic differences.
+A basic example of using bags is getting the prime factors of a number. As an example, the prime factorization of 149688 is 2²⋅3⁵⋅7⋅11². For the general case in high-level programming, I would argue that a bag containing {2, 2, 3, 3, 3, 3, 3, 7, 11, 11} is the best way to represent this. This is a simplistic example where the performance advantages and disadvantages of bags don't come into play much, but it demonstrates these differences as well as semantic differences.
 
 Prime factorization functions generally return lists. For instance, calling `factor(149688)` in Matlab or Octave will return a vector `[2, 2, 3, 3, 3, 3, 3, 7, 11, 11]`. This approach has the advantage of returning the values in a sorted order. However, determining whether a value is present or its multiplicity is an O(n) operation. For dealing with prime factors, these are common tasks. Furthermore, these operations, although immediately available for hash bags, are often not part of the list API (which is the case in Matlab) as they aren't fast and, in the case of multiplicity, are uncommon in interacting with lists in general.
 
-TODO: semantic advantages of bags
+Here, using a hash bag also communicates useful details about the data:
+
+- There's no particular order (you could make arguments for sorting by value, multiplicity, etc., but none of these are inherent to the data)
+- Elements can appear multiple times
+- The number of times an element appears is relevant (and retrieving it is fast)
+
+One last good example of how bags are appropriate are how common operations on prime factorizations can be easily implemented using bag set operations. For instance, a number divides another if its prime factorization is a 'subset' (subbag?) of another number's prime factorization. Also, the GCD of two numbers is the product of the bag intersection of their prime factors. This would be much more tedious to calculate given lists of prime factors.
 
 It's worth noting that in languages with lazy evaluation or lazy lists, it's reasonable for functions like this to return lazy lists that can be collected into bags (since they represent incomplete computations where the computations occur in some order and not necessarily the structure of data). See 'Lazy bags' below.
 
 ##Example: statistical data
 
+An example that's possibly more practical is an unordered set of measurements somewhere between the sizes of "I can eyeball trends" and "oh god I need a database". An example of this would be a set of survey responses to a particular question. Again, there are performance and semantic advantages to using bags here. The semantic advantage is that you immediately express the properties of your dataset as just being an unordered collection of responses. You also get asymptotic performance advantages like the following compared to lists:
+
+- Can find the unique responses made in O(n_unique) instead of O(n)
+- Can find the number of times a particular response was made in O(1) instead of O(n)
+- Can find the mode in O(n_unique) instead of O(n)
+
+Where n_unique is the number of unique responses to the question.
+
 ##The case for bags
+
+###Caveats: performance
 
 ##A note on persistence
 
