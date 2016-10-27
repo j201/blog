@@ -13,24 +13,23 @@ Here, I want to argue that [bags (aka multisets)](https://en.wikipedia.org/wiki/
 
 A bag is simply a data structure that stores arbitrary elements with no defined order. This is different from a list, which has a defined order, and a set, which has no order but cannot store multiple elements with the same value. Losing the property of being ordered can give bags performance boosts over lists for certain operations, like checking how many of an element exist in the bag, or which unique elements exist.
 
-TODO: Table:
-             No multiple elements with same value | Multiple elements with same value
-Ordered      Sorted set                             List
-Unordered    Set                                    Bag
+| | No multiple elements with same value | Multiple elements with same value |
+| --- | --- | --- |
+| Ordered | Sorted set | List |
+| Unordered | Set | Bag |
 
 A basic bag interface might only expose `add` and `remove` operations, aside from a constructor. ([Here's](https://gist.github.com/j201/7365644) a sample implemetation in Clojure.) Of course, a real implementation would provide a `size` function, a function to see how many times a value appears ('multiplicity'), iterators (there's more than one way to iterate through a bag), set operations, functions to map, filter, or fold, etc. The implementation can vary based on what kind of efficiency characteristics are wanted. A hash map linking keys to an integer representing the number of times a key appears in the bag generally provides the best asymptotic behaviour, but trees and vectors can also be used. An implementation could even use a combination of implementation approaches or switch between them according to usage.
 
 This table shows basic asymptotic average case performance and tasks where bags differ substantially from lists and sets. It assumes implementation with a hash map from values to multiplicities.
 
-TODO: highlight
-|| Hash bags | Arrays | Linked Lists | Hash sets
---- | --- | --- | --- | ---
-Random insert/delete | O(1) | O(n) | O(n) | O(1)
-Best case insert/delete | O(1) | O(1) | O(1) | O(1)
-Search for value | O(1) | O(n) | O(n) | O(n)
-Multiplicity | O(1) | O(n) | O(n) | N/A
-Union/concatenation | O(n) | O(n) | O(1) | O(n)
-Unique values | O(1) | O(n) | O(n) | O(1)
+| | Hash bags | Arrays | Linked Lists | Hash sets |
+| --- | --- | --- | --- | --- |
+| Random insert/delete | **O(1)** | O(n) | O(n) | **O(1)** |
+| Best case insert/delete | **O(1)** | **O(1)** | **O(1)** | **O(1)** |
+| Search for value | **O(1)** | O(n) | O(n) | **O(1)** |
+| Multiplicity | **O(1)** | O(n) | O(n) | N/A |
+| Union/concatenation | O(n) | O(n) | **O(1)** | O(n) |
+| Unique values | **O(1)** | O(n) | O(n) | **O(1)** |
 
 ##Example: prime factors
 
@@ -60,17 +59,17 @@ Where n_unique is the number of unique responses to the question.
 
 ## The advantages of bags
 
-Using appropriate data structures is not only an efficiency concern, it also expresses properties of your data. Essentially, it provides documentation about how you intend to use the data. (In many cases, especially in dynamic languages, the data structures we use are small enough that most efficiency concerns are irrelevant.) When I use a set, for instance, I'm communicating that the only relevant information being stored is the presence or absence of a value in the set. Using a bag provides similar information: it indicates that the multiplicity of elements matters, but not the order.
+Using appropriate data structures is not only an efficiency concern; it also expresses properties of your data. Essentially, it provides documentation about how you intend to use the data. (And in many cases, especially in dynamic languages, the data structures we use are small enough that most efficiency concerns are irrelevant.) When I use a set, for instance, I'm communicating that the only relevant information being stored is the presence or absence of a value in the set. Using a bag provides similar information: it indicates that the multiplicity of elements matters, but not the order.
 
 (paragraph: a more flexible/appropriate API)
 
-To summarize, using a bag when appropriate has the following upsides compared to a less appropriate data structure:
+(paragraph: performance pros and cons)
+
+To conclude, using a bag when appropriate has the following upsides compared to a less appropriate data structure:
 
 - Efficiency is better for certain operations
 - The API can often be more flexible
 - The choice of data structure emphasizes that the order of the data is relevant
-
-###Caveat: performance
 
 ##Appendix: Special bags
 
