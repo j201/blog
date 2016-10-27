@@ -64,11 +64,11 @@ Using appropriate data structures is not only an efficiency concern, it also exp
 
 (paragraph: a more flexible/appropriate API)
 
-To summarize, using another data structure when a bag would be appropriate has the following downsides:
+To summarize, using a bag when appropriate has the following upsides compared to a less appropriate data structure:
 
-- Efficiency for certain operations is worse
-- The API is less flexible and appropriate for the application
-- It doesn't express that the order of the data is irrelevant
+- Efficiency is better for certain operations
+- The API can often be more flexible
+- The choice of data structure emphasizes that the order of the data is relevant
 
 ###Caveat: performance
 
